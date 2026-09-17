@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11131d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Shepherding Journal">
+  <meta name="description" content="Shepherding Journal and Cell Activity Reports">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Shepherding Journal</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button class="brand" data-nav="dashboard" aria-label="Go to dashboard">
+        <span class="brand-mark">S</span>
+        <span class="brand-copy">
+          <strong>Shepherding</strong>
+          <small>Journal</small>
+        </span>
+      </button>
+      <div class="top-actions">
+        <button id="saveStatus" class="status-pill" type="button" title="Saved automatically">
+          <span class="status-dot"></span><span id="saveText">Saved</span>
+        </button>
+        <button id="menuBtn" class="icon-btn" type="button" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <section id="dashboard" class="view active">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">BACENTA LEADERS</p>
+            <h1>Weekly Show Working<br><em>Shepherding Journal</em></h1>
+            <p class="hero-sub">Keep your shepherding work and cell activity records together in one simple place.</p>
+          </div>
+          <div class="hero-orb" aria-hidden="true"><span>S</span></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <button class="feature-card featured" data-nav="shepherding">
+            <div class="card-icon">01</div>
+            <div class="card-content">
+              <span class="card-kicker">WEEKLY</span>
+              <h2>Shepherding Journal</h2>
+              <p>12 prayer hours, 10 shepherding activities and service attendance.</p>
+            </div>
+            <span class="arrow">→</span>
+          </button>
+          <button class="feature-card" data-nav="weekly">
+            <div class="card-icon">02</div>
+            <div class="card-content">
+              <span class="card-kicker">APPENDIX B · PART A</span>
+              <h2>Weekly Cell Activity</h2>
+              <p>Record weekly prayer, Word, outreach and attendance activity.</p>
+            </div>
+            <span class="arrow">→</span>
+          </button>
+          <button class="feature-card" data-nav="monthly">
+            <div class="card-icon">03</div>
+            <div class="card-content">
+              <span class="card-kicker">APPENDIX B · PART B</span>
+              <h2>Monthly Cell Activity</h2>
+              <p>Complete the month-end report in one clean digital form.</p>
+            </div>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="quick-row">
+          <div class="quick-card">
+            <span class="quick-label">CURRENT WEEK</span>
+            <strong id="dashWeek">Week 1</strong>
+          </div>
+          <div class="quick-card">
+            <span class="quick-label">SHEPHERDING</span>
+            <strong id="dashProgress">0 / 10</strong>
+          </div>
+          <div class="quick-card">
+            <span class="quick-label">PRAYER HOURS</span>
+            <strong id="dashPrayer">0 / 12</strong>
+          </div>
+        </div>
+
+        <div class="privacy-note">
+          <div class="note-icon">i</div>
+          <div><strong>Your entries stay on this device.</strong><br><span>This version uses your browser's local storage, so there is no account or paid database.</span></div>
+        </div>
+      </section>
+
+      <section id="shepherding" class="view">
+        <div class="page-heading">
+          <button class="back-btn" data-nav="dashboard">← Dashboard</button>
+          <p class="eyebrow">WEEKLY RECORD</p>
+          <h1>Shepherding Journal</h1>
+          <p>One journal for each week. Your changes save automatically.</p>
+        </div>
+        <div class="controls-card">
+          <div class="field">
+            <label for="shepMonth">Month</label>
+            <input id="shepMonth" type="text" placeholder="e.g. September 2026" data-bind="shep.month">
+          </div>
+          <div class="field">
+            <label for="shepWeek">Week number</label>
+            <select id="shepWeek" data-bind="shep.week">
+              <option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option>
+              <option value="4">Week 4</option><option value="5">Week 5</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <div><span class="section-number">01</span><div><h2>Prayer hours</h2><p>12-hour prayer record</p></div></div>
+            <span class="progress-mini" id="prayerProgress">0 / 12</span>
+          </div>
+          <div id="prayerRows" class="prayer-list"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <div><span class="section-number">02</span><div><h2>Shepherding activities</h2><p>Tick each activity when completed and add comments where needed.</p></div></div>
+            <span class="progress-mini" id="activityProgress">0 / 10</span>
+          </div>
+          <div id="activityList" class="activity-list"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <div><span class="section-number">03</span><div><h2>Service / meeting attendance</h2><p>Record the service or meeting and whether the member attended.</p></div></div>
+          </div>
+          <div class="attendance-list" id="attendanceList"></div>
+        </div>
+      </section>
+
+      <section id="weekly" class="view">
+        <div class="page-heading">
+          <button class="back-btn" data-nav="dashboard">← Dashboard</button>
+          <p class="eyebrow">APPENDIX B · PART A</p>
+          <h1>Weekly Cell Activity</h1>
+          <p>To be completed weekly.</p>
+        </div>
+        <div class="controls-card">
+          <div class="field">
+            <label for="weeklyMonth">Month</label>
+            <input id="weeklyMonth" type="text" placeholder="e.g. September 2026" data-bind="weekly.month">
+          </div>
+          <div class="field">
+            <label for="weeklyWeek">Week number</label>
+            <select id="weeklyWeek" data-bind="weekly.week">
+              <option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option>
+              <option value="4">Week 4</option><option value="5">Week 5</option>
+            </select>
+          </div>
+        </div>
+        <div id="weeklyForm"></div>
+      </section>
+
+      <section id="monthly" class="view">
+        <div class="page-heading">
+          <button class="back-btn" data-nav="dashboard">← Dashboard</button>
+          <p class="eyebrow">APPENDIX B · PART B</p>
+          <h1>Monthly Cell Activity</h1>
+          <p>To be completed at the end of the month.</p>
+        </div>
+        <div class="controls-card single">
+          <div class="field">
+            <label for="monthlyMonth">Month</label>
+            <input id="monthlyMonth" type="text" placeholder="e.g. September 2026" data-bind="monthly.month">
+          </div>
+        </div>
+        <div id="monthlyForm"></div>
+      </section>
+
+      <section id="settings" class="view">
+        <div class="page-heading">
+          <button class="back-btn" data-nav="dashboard">← Dashboard</button>
+          <p class="eyebrow">APP SETTINGS</p>
+          <h1>Settings & backup</h1>
+          <p>Everything is stored locally in your browser.</p>
+        </div>
+        <div class="settings-grid">
+          <div class="section-card">
+            <div class="section-head"><div><span class="section-number">01</span><div><h2>Backup</h2><p>Keep a copy of your entries if you change phones or browsers.</p></div></div></div>
+            <div class="button-row">
+              <button id="exportBtn" class="primary-btn">Export backup</button>
+              <label class="secondary-btn file-btn">Import backup<input id="importInput" type="file" accept="application/json"></label>
+            </div>
+          </div>
+          <div class="section-card danger-card">
+            <div class="section-head"><div><span class="section-number">02</span><div><h2>Clear this device</h2><p>This permanently removes saved entries from this browser.</p></div></div></div>
+            <button id="clearBtn" class="danger-btn">Clear all saved entries</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button data-nav="dashboard" class="nav-item active"><span class="nav-icon">⌂</span><span>Home</span></button>
+      <button data-nav="shepherding" class="nav-item"><span class="nav-icon">01</span><span>Journal</span></button>
+      <button data-nav="weekly" class="nav-item"><span class="nav-icon">02</span><span>Weekly</span></button>
+      <button data-nav="monthly" class="nav-item"><span class="nav-icon">03</span><span>Monthly</span></button>
+    </nav>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
