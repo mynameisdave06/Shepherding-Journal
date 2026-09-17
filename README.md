@@ -1,15 +1,16 @@
 # Shepherding Journal
 
-A personal, mobile-first Shepherding Journal and Cell Activity tracker.
+A personal mobile-first Shepherding Journal and Cell Activity app. It can run as a private PWA and optionally sync journal data to a private Supabase account.
 
-## Features
-- iPhone-style standalone PWA interface
-- Weekly Shepherding Journal: 5 weeks, 12 prayer hours, 10 shepherding activities, attendance
-- Weekly Cell Activity Report
-- Monthly Cell Activity Report
-- Automatic local saving
-- Export/import JSON backups
-- Offline after first load
-- No account, database, analytics, or external libraries
+## Cloud setup (optional)
+1. Create a Supabase project.
+2. Open SQL Editor and run `supabase.sql`.
+3. Open Project Settings/API and copy the Project URL and Publishable key.
+4. Put them in `config.js`:
+   - `url: 'https://YOUR-PROJECT.supabase.co'`
+   - `key: 'YOUR-PUBLISHABLE-KEY'`
+5. Upload the changed files to GitHub Pages.
 
-All records are stored locally in the browser/device. The source can be hosted privately or locally; this project does not require a server database.
+Use the **publishable** key in the browser, never a `service_role`/secret key. The database is protected by Row Level Security so each signed-in account can access only its own row.
+
+If email confirmation is enabled in Supabase, confirm the email before signing in.

@@ -10,6 +10,25 @@
 <div id="app">
 <header class="appbar"><button class="brand" data-nav="dashboard"><span class="brand-icon">S</span><span><b>Shepherding</b><small>Personal journal</small></span></button><button class="save-chip" id="saveStatus"><i></i><span id="saveText">Saved</span></button></header>
 <main class="main">
+<section id="account" class="view">
+  <div class="page-head"><button class="back" data-nav="dashboard">‹ Home</button><p class="overline">PRIVATE CLOUD</p><h1>Your account</h1><p>Sign in to keep your Shepherding Journal safely synced in the cloud.</p></div>
+  <div id="authSignedOut" class="auth-card">
+    <div class="auth-icon">☁</div>
+    <h2 id="authTitle">Create your account</h2>
+    <p id="authSubtitle">Use your email and a password. Your journal stays tied to your account.</p>
+    <label class="auth-label">EMAIL<input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"></label>
+    <label class="auth-label">PASSWORD<input id="authPassword" type="password" autocomplete="new-password" placeholder="At least 6 characters"></label>
+    <button id="authSubmit" class="primary-btn full">Create account</button>
+    <button id="authToggle" class="text-btn">Already have an account? Sign in</button>
+    <p id="authMessage" class="auth-message"></p>
+  </div>
+  <div id="authSignedIn" class="auth-card hidden">
+    <div class="auth-icon">✓</div><h2>Cloud sync is on</h2><p id="accountEmail"></p>
+    <div class="sync-status"><span class="sync-dot"></span><span id="syncText">Synced</span></div>
+    <div class="button-row"><button id="syncNowBtn" class="primary-btn">Sync now</button><button id="signOutBtn" class="secondary-btn">Sign out</button></div>
+    <p class="privacy-note">Only your signed-in account can read or change its journal data.</p>
+  </div>
+</section>
 <section id="dashboard" class="view active">
   <div class="home-hero"><div><p class="overline">BACENTA LEADERS</p><h1>Show working.<br><span>Shepherd well.</span></h1><p>Everything you need for your weekly shepherding and cell activity records.</p></div><div class="hero-badge"><span>WEEK</span><strong id="heroWeek">01</strong></div></div>
   <div class="month-line"><div><small>Current month</small><strong id="homeMonth">Not set</strong></div><button class="ghost-btn" data-nav="shepherding">Open journal <b>→</b></button></div>
@@ -20,7 +39,7 @@
     <button class="home-card" data-nav="weekly"><span class="num">02</span><div><small>WEEKLY REPORT</small><h2>Cell Activity</h2><p>Prayer, Word, soul-winning activity and attendance.</p></div><b>›</b></button>
     <button class="home-card" data-nav="monthly"><span class="num">03</span><div><small>MONTHLY REPORT</small><h2>Monthly Activity</h2><p>Complete your month-end record in one place.</p></div><b>›</b></button>
   </div>
-  <div class="private-card"><span>⌁</span><div><b>Private by design</b><p>Your entries are saved on this device. No account is required.</p></div></div>
+  <div class="private-card" id="cloudCard"><span>☁</span><div><b>Private cloud backup</b><p id="cloudCardText">Sign in to sync your journal between devices.</p></div><button class="mini-btn" data-nav="account">Set up</button></div>
 </section>
 
 <section id="shepherding" class="view">
@@ -33,9 +52,9 @@
 
 <section id="weekly" class="view"><div class="page-head"><button class="back" data-nav="dashboard">‹ Home</button><p class="overline">PART A</p><h1>Weekly Cell Activity</h1><p>To be completed weekly.</p></div><div class="selector"><label>MONTH<input id="weeklyMonth" type="text" placeholder="September 2026"></label><label>WEEK<select id="weeklyWeek"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label></div><div id="weeklyForm"></div></section>
 <section id="monthly" class="view"><div class="page-head"><button class="back" data-nav="dashboard">‹ Home</button><p class="overline">PART B</p><h1>Monthly Cell Activity</h1><p>To be completed at the end of the month.</p></div><div class="selector one"><label>MONTH<input id="monthlyMonth" type="text" placeholder="September 2026"></label></div><div id="monthlyForm"></div></section>
-<section id="settings" class="view"><div class="page-head"><button class="back" data-nav="dashboard">‹ Home</button><p class="overline">PRIVATE SETTINGS</p><h1>Backup & settings</h1><p>Keep a copy of your journal data.</p></div><div class="section-card"><div class="card-head"><div><span>01</span><div><h2>Backup</h2><p>Export your entries or restore a previous backup.</p></div></div></div><div class="button-row"><button id="exportBtn" class="primary-btn">Export backup</button><label class="secondary-btn">Import backup<input id="importInput" type="file" accept="application/json"></label></div></div><div class="section-card danger"><div class="card-head"><div><span>02</span><div><h2>Clear device</h2><p>Remove all saved entries from this device.</p></div></div></div><button id="clearBtn" class="danger-btn">Clear all entries</button></div></section>
+<section id="settings" class="view"><div class="page-head"><button class="back" data-nav="dashboard">‹ Home</button><p class="overline">PRIVATE SETTINGS</p><h1>Backup & settings</h1><p>Keep a copy of your journal data.</p></div><div class="section-card"><div class="card-head"><div><span>01</span><div><h2>Cloud & backup</h2><p>Cloud sync plus a manual backup file.</p></div></div></div><div class="button-row"><button id="cloudSettingsBtn" class="primary-btn">Cloud account</button><button id="exportBtn" class="secondary-btn">Export backup</button><label class="secondary-btn">Import backup<input id="importInput" type="file" accept="application/json"></label></div></div><div class="section-card danger"><div class="card-head"><div><span>02</span><div><h2>Clear device</h2><p>Remove all saved entries from this device.</p></div></div></div><button id="clearBtn" class="danger-btn">Clear all entries</button></div></section>
 </main>
 <nav class="tabbar"><button data-nav="dashboard" class="active"><span>⌂</span><b>Home</b></button><button data-nav="shepherding"><span>✓</span><b>Journal</b></button><button data-nav="weekly"><span>02</span><b>Weekly</b></button><button data-nav="monthly"><span>03</span><b>Monthly</b></button><button data-nav="settings"><span>•••</span><b>More</b></button></nav>
 <div id="toast" class="toast"></div>
-</div><script src="app.js"></script>
+</div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="app.js"></script>
 </body></html>
