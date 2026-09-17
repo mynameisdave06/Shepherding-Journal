@@ -1,14 +1,1 @@
-{
-  "name": "Shepherding Journal",
-  "short_name": "Shepherding",
-  "description": "Shepherding Journal and Cell Activity Reports",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#0c0d13",
-  "theme_color": "#11131d",
-  "orientation": "portrait-primary",
-  "icons": [
-    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-  ]
-}
+{"name":"Shepherding Journal","short_name":"Shepherding","start_url":"./","display":"standalone","background_color":"#09090f","theme_color":"#09090f","orientation":"portrait","icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"}]}
